@@ -1,0 +1,1 @@
+var costCalculator = angular.module('costCalculator', ['ngSanitize', 'calculatorModule']);
