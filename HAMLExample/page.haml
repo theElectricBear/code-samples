@@ -1,0 +1,15 @@
+= partial "templates/components/head", locals: { page: page }
+
+%body{class: "#{page.body_class}"}
+    .container
+
+        - header = page.header ? page.header : "templates/components/header"
+        = partial header, locals: { page: page }
+
+        - page.sections.each do |section|
+            = partial "templates/sections/#{section.template}", locals: { section: section }
+
+        - footer = page.footer ? page.footer : "templates/components/footer"
+        = partial footer, locals: { page: page }
+
+= partial "templates/components/foot", locals: { page: page }

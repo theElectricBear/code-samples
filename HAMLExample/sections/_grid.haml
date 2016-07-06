@@ -1,0 +1,8 @@
+- images_path = 'images/themes/image-factory/grid'
+.row.no-gutter
+    %h2.col-xs-12 #{section.headline}
+    %section.grid.col-xs-12{:id => "grid"}
+        %ul{"style" => "list-style-type:none;padding-left:0;"}
+            - (section.content).each do |i|
+                %li.col-md-3.col-sm-6{"style" => "overflow:hidden"}
+                    %img{:alt => "#{i.alt}", :src => "#{images_path}/#{i.src}"}

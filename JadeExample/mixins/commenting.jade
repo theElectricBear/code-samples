@@ -1,0 +1,39 @@
+mixin comment-form(action)
+	form(method='post', id="commentForm", style="margin-bottom: 40px; margin-top: 40px;")
+		input(type='hidden', name='action', value='comment.create')
+		input(name='comment', type='textbox' placeholder='Comment here...' style="margin-bottom: 10px; resize: vertical;").form-control
+
+		button(type='submit').btn.btn-primary 
+			| Post Comment
+
+mixin comment-post(comment)
+	if comment.author
+		div(id='comment-id-' + comment.id, style="margin-top: 20px;")
+			.media
+				.pull-left
+					img(src=comment.author.photo.exists ? comment.author._.photo.thumbnail(80,80) : 'http://placehold.it/80x80', alt=comment.author.name.full, width=80, height=80).img-rounded
+				.media-body
+					p
+						strong= comment.author.name.full
+						if user && user.id === comment.author.id
+							|  &middot; 
+							a(href='?remove=comment&comment=' + comment.id, title='Delete this comment', rel='tooltip', data-placement='left').comment-delete.js-delete-confirm Delete
+					p=comment.content.replace(/\n/g, '<br>')
+
+mixin comment-thread(comments)
+	p
+		| words words words
+
+mixin comment-modal()
+	#commentModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="commentModalLabel", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				button.close(type="button", data-dismiss="modal", aria-hidden="true") 
+					| &times;
+				+comment-form(action)
+mixin comments-modal()
+	#commentsModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="commentsModalLabel", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				button.close(type="button", data-dismiss="modal", aria-hidden="true") 
+					| &times;

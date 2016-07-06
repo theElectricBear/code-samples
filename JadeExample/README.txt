@@ -1,0 +1,1 @@
+Code was pulled from a small project, at the time still a work in progress. Not properly truncated or commented.

@@ -1,0 +1,25 @@
+- images_path = 'images/themes/image-factory/carousel'
+.row.no-gutter
+    %section.col-xs-12.carousel.slide{:id => "slideShow", "data-ride" => "carousel"}
+        %h2 #{section.headline}
+        / Indicators
+        %ol.carousel-indicators
+            %li.active{"data-slide-to" => "0", "data-target" => "#slideShow"}
+            %li{"data-slide-to" => "1", "data-target" => "#slideShow"}
+            %li{"data-slide-to" => "2", "data-target" => "#slideShow"}
+            %li{"data-slide-to" => "3", "data-target" => "#slideShow"}
+        / Wrapper for slides
+        .carousel-inner{:role => "listbox"}
+            .item.active
+                %img{:alt => "image1", :src => "#{images_path}/carousel-one.jpg"}
+            .item
+                %img{:alt => "image2", :src => "#{images_path}/carousel-two.jpg"}
+            .item 
+                %img{:alt => "image3", :src => "#{images_path}/carousel-three.jpg"}
+            .item
+                %img{:alt => "image4", :src => "#{images_path}/carousel-four.jpg"}
+        / Left and right controls
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#slideShow", :role => "button"} 
+            %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+        %a.right.carousel-control{"data-slide" => "next", :href => "#slideShow", :role => "button"}
+            %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}

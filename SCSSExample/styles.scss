@@ -1,0 +1,10 @@
+@mixin background-scrim{
+    background-color: rgba(187,201,201, 0.7);
+}
+
+@import 'reset';
+@import 'main';
+@import 'content';
+
+
+

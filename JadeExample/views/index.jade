@@ -1,0 +1,81 @@
+extends ../layouts/default
+
+include ../mixins/commenting
+include ../mixins/submissions
+
+
+
+block content
+	.container: .row
+		//-	submissions
+		section.col-xs-12.col-sm-4.submission
+			.header
+			p 
+				| Please tell me five things about yourself thatyou like. I can't time you, but I'd prefer if youdid this in under a minute. Life is busy.
+			+submission-form()
+		//- results
+		section.col-xs-12.col-sm-7.col-sm-offset-1.results
+			.header
+			if data.submissions.results.length
+				if data.submissions.totalPages > 1
+					h4.text-weight-normal Showing 
+						strong #{data.submissions.first}
+						|  to 
+						strong #{data.submissions.last}
+						|  of 
+						strong #{data.submissions.total}
+						|  submissions.
+				else
+					h4.text-weight-normal Showing #{utils.plural(data.submissions.results.length, '* submission')}.
+			each submission in data.submissions.results
+				- var comments = []
+				each comment in data.comments
+					- if(comment.submission == submission.id)
+						- comments.push(comment.comment);
+				- submission['comments'] = comments;
+				- console.log(submission.id);
+				- console.log(submission.comments.length);
+				- console.log(submission.comments);
+				+submission(submission)
+						
+			if data.submissions.totalPages > 1
+				ul.results_pagination
+					li
+						| page
+					each p, i in data.submissions.pages
+						li(class=data.submissions.currentPage == p ? 'active' : null)
+							a(href='?page=' + (p == '...' ? (i ? data.submissions.totalPages : 1) : p ))= p
+	+comment-modal()
+	+comments-modal()
+
+block js
+	script.
+		jQuery(function($) {
+			var comments = !{JSON.stringify(data.comments)};
+			var commentsContent = $('#commentsModal .modal-content');
+
+			var commentBtn = $('.result_leave_comment');
+			var commentForm = $('#commentForm');
+			var commentsBtn = $('.result_comments');
+
+			commentBtn.click(function(){
+				var subId = $(this).data('submission');
+				$('<input>').attr({
+				    type: 'hidden',
+				    value: subId,
+				    name: 'submission'
+				}).appendTo(commentForm);
+			});
+			
+			commentsBtn.click(function(){
+				var subId = $(this).data('submission');
+				console.dir(comments);
+				for (i = 0; i < comments.length; i++) { 
+				    if(comments[i].submission == subId){
+				    	console.log(comments[i].comment);
+				    	commentsContent.append("<p>" + comments[i].comment + "</p><hr />");
+				    };
+				}
+			});
+		});
+

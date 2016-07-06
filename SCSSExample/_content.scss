@@ -1,0 +1,25 @@
+.backgroundImg{
+    width:100vw;
+    height:100vh;
+    position: absolute;
+    z-index: 0;
+    filter: blur(14px) grayscale(60%) opacity(70%);
+    transform: translate3d(0,0,0);
+}
+
+.container{
+    padding:5%;
+    @include background-scrim;
+    // @media (min-width: 720px) {
+    //     width:70%;
+    // }
+    // @media (min-width: 940px) {
+    //     width:50%;
+    // }
+}
+.content{
+    ul{
+        display:inline-block;
+        vertical-align: top;
+    }
+}

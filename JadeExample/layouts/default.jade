@@ -1,0 +1,54 @@
+include ../mixins/flash-messages
+
+doctype html
+html
+
+	//- HTML HEADER
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+
+		title= title || '5Things'
+		link(rel="shortcut icon", href="/FiveThings.ico?v=2", type="image/x-icon")
+
+		link(href="/styles/site.css", rel="stylesheet")
+		//-[if lt IE 9]
+			script(src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js")
+			script(src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js")
+		//-[endif]
+
+		block css
+		block head
+
+	//- HTML BODY
+	body
+
+		//- HEADER
+		#header: .container
+
+			div(role="navigation").navbar.navbar-default
+				.container-fluid
+					.navbar-header.col-sm-9
+						a.navbar-brand(href='/') 5Things
+					.col-sm-3
+						ul.nav.navbar-nav.navbar-right
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+		//- BODY
+		#body
+			block content
+
+		//- FOOTER
+		.container: #footer
+			p &#169; 2012 5. things about yourself
+
+
+		//- JAVASCRIPT
+
+		script(src='/js/jquery/jquery-1.11.3.min.js')
+		script(src='/js/bootstrap/bootstrap-3.3.5.min.js')
+
+
+		//- Include template-specific javascript files by extending the js block
+		block js

@@ -1,0 +1,1 @@
+A small angular module originally built for in-store devices, later translated to be hosted with in clients .net framework.
